@@ -1,6 +1,4 @@
-
-
-   <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -16,7 +14,7 @@
 
         <ul>
             <li><a href="/home">Home</a></li>
-            <li><a href="/cadastro">Cadastro</a></li>
+          
         </ul>
     </nav>
 
@@ -24,23 +22,30 @@
 
         <h1>Controle de Almoxarifado</h1>
 
-        <div class="formulario">
+        <form class="formulario" action="/adicionar" method="POST" enctype="multipart/form-data">>
 
             <input
                 type="text"
-                id="nomeProduto"
-                placeholder="Nome do produto">
+                name="nome"
+                placeholder="Nome do produto"
+                required>
 
             <input
                 type="number"
-                id="quantidadeProduto"
-                placeholder="Quantidade">
+                name="quantidade"
+                placeholder="Quantidade"
+                required>
 
-            <button onclick="adicionarProduto()">
+            <input
+              type="file"
+              name="foto"
+              accept="image/*">
+
+            <button type="submit">
                 Adicionar Produto
             </button>
 
-        </div>
+        </form>
 
         <table>
 
