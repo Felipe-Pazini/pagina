@@ -14,15 +14,17 @@
 
         <ul>
             <li><a href="/home">Home</a></li>
-          
         </ul>
+
     </nav>
 
     <div class="container">
 
         <h1>Controle de Almoxarifado</h1>
 
-        <form class="formulario" action="/adicionar" method="POST" enctype="multipart/form-data">>
+        {% if session.get("cargo") == "admin" %}
+
+        <form class="formulario" action="/adicionar" method="POST" enctype="multipart/form-data">
 
             <input
                 type="text"
@@ -37,15 +39,17 @@
                 required>
 
             <input
-              type="file"
-              name="foto"
-              accept="image/*">
+                type="file"
+                name="foto"
+                accept="image/*">
 
             <button type="submit">
                 Adicionar Produto
             </button>
 
         </form>
+
+        {% endif %}
 
         <table>
 
@@ -54,9 +58,12 @@
                 <tr>
                     <th>Produto</th>
                     <th>Quantidade</th>
-                    <th>Entrada</th>
-                    <th>Saída</th>
-                    <th>Excluir</th>
+
+                    {% if session.get("cargo") == "admin" %}
+                        <th>Entrada</th>
+                        <th>Saída</th>
+                        <th>Excluir</th>
+                    {% endif %}
                 </tr>
 
             </thead>

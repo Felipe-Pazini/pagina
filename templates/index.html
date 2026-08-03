@@ -6,32 +6,42 @@
     <title>LOGIN SENAI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-        
+
     <div class="login-card">
         <h2>Login</h2>
-        
+
         <form action="/login" method="POST">
+
             <div class="form-group">
                 <label>E-mail</label>
                 <input type="email" name="email" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
-      <a href="{{ url_for('home') }}">
-     <button type="button" class="btn">Entrar</button>
-     <br>
-     <br> 
-<a href="{{ url_for('cadastro') }}">
-     <button type="button" class="btn">Cadastrar</button>
-       </a>
+
+            <button type="submit" class="btn">Entrar</button>
+
+            <br><br>
+
+            <a href="{{ url_for('cadastro') }}">
+                <button type="button" class="btn">Cadastrar</button>
+            </a>
+
+            {% if erro %}
+                <p style="color:red;">{{ erro }}</p>
+            {% endif %}
+
         </form>
     </div>
-        
-    <img id="logosenai" src="{{ url_for('static', filename='logosenai.jpg') }}" alt="Rodapé SENAI">
+
+    <img id="logosenai"
+         src="{{ url_for('static', filename='logosenai.jpg') }}"
+         alt="Rodapé SENAI">
 
 </body>
 </html>
