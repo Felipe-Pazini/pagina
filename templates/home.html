@@ -47,6 +47,7 @@
         <tr>
             <th>Produtos</th>
             <th>Quantidade</th>
+            <th class="text-center" style="width:180px;">ver produto</th>
         </tr>
     </thead>
 
@@ -57,6 +58,15 @@
         <tr>
             <td>{{ produto[1] }}</td>
             <td>{{ produto[2] }}</td>
+        
+
+        <td class="text-center align-middle">
+    <button class="btn btn-primary btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modalFoto{{ produto[0] }}">
+       📷
+    </button>
+</td>
         </tr>
 
        {% endfor %}
@@ -64,6 +74,43 @@
     </tbody>
   </table>
 </div>
+
+{% for produto in produtos %}
+
+<div class="modal fade" id="modalFoto{{ produto[0] }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Foto de {{ produto[1] }}</h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body text-center">
+
+    {% if produto[3] %}
+
+        <img
+            src="{{ url_for('static', filename='image/' + produto[3]) }}"
+            alt="Foto do produto"
+            style="max-width: 100%; max-height: 300px;">
+
+    {% else %}
+
+        <p>Este produto não possui foto cadastrada.</p>
+
+    {% endif %}
+
+</div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 import os
 
 app = Flask(__name__)
+app.secret_key = "123"
 
 @app.route("/")
 def index():
@@ -10,6 +11,8 @@ def index():
 
 @app.route("/cadastro")
 def cadastro():
+
+
     return render_template("cadastro.html")
 
 @app.route("/home")
@@ -18,7 +21,7 @@ def home():
     conexao = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="172909",
         database="almoxarifado"
     )
 
@@ -43,7 +46,7 @@ def adicionar():
     conexao = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="172909",
         database="almoxarifado"
     )
 
@@ -53,20 +56,16 @@ def adicionar():
     quantidade = request.form["quantidade"]
 
     foto = request.files["foto"]
-    print("teste")
-    print(foto)
 
     nome_foto = foto.filename
-
-    print(nome_foto)
 
     caminho = os.path.join("static", "image", nome_foto)
 
     foto.save(caminho)
 
     cursor.execute(
-        "INSERT INTO produtos(nome, quantidade) VALUES (%s, %s)",
-        (nome, quantidade)
+        "INSERT INTO produtos(nome, quantidade, foto) VALUES (%s, %s, %s)",
+        (nome, quantidade, nome_foto)
     )
 
     conexao.commit()
@@ -76,5 +75,8 @@ def adicionar():
 
     return redirect("/home")
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+    
